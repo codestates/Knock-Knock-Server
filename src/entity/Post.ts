@@ -32,7 +32,7 @@ export class Post {
   @Column()
   content: string;
 
-  @Column()
+  @Column({default: true})
   open: boolean;
 
   @CreateDateColumn()
