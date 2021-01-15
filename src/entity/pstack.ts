@@ -3,14 +3,12 @@ import { Post } from "./Post";
 
 @Entity()
 export class Pstack {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  stackName: string;
 
-    @Column()
-    stackName: string;
-
-    @ManyToOne(() => Post, post => post.id)
-    post: Post;
-
+  @ManyToMany(() => Post, (post) => post.id)
+  post: Post;
 }
