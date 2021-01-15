@@ -1,3 +1,5 @@
+/** @format */
+
 module.exports = {
   profileController: require("./profile"),
   postsController: require("./posts"),
