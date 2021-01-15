@@ -10,9 +10,9 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import { Pstack} from "./Pstack";
+import { Pstack } from "./Pstack";
 import { User } from "./User";
-import {Comment} from "./Comment"
+import { Comment } from "./Comment";
 import { Diary } from "./Diary";
 
 @Entity()
@@ -32,7 +32,7 @@ export class Post {
   @Column()
   content: string;
 
-  @Column({default: true})
+  @Column({ default: true })
   open: boolean;
 
   @CreateDateColumn()
@@ -57,10 +57,14 @@ export class Post {
   comment: Comment[];
 
   @ManyToMany(() => Pstack)
-  @JoinTable()
+  @JoinTable({
+    name: "post_pstack",
+  })
   pstack: Pstack[];
 
   @ManyToMany(() => User)
-  @JoinTable()
+  @JoinTable({
+    name: "post_user",
+  })
   user: User;
 }
