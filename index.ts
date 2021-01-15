@@ -15,7 +15,7 @@ require("dotenv").config();
 // const commentsRouter = require("./routes/comments");
 // const searchRouter = require("./routes/search");
 // const joinRouter = require("./routes/join");
-const oauthRouter = require("./routes/oauth");
+// const oauthRouter = require("./routes/oauth");
 
 const app = express();
 
@@ -39,13 +39,11 @@ app.use(express.urlencoded({ extended: false }));
 // app.use("/join", joinRouter);
 // app.use("/oauth", oauthRouter);
 
-
 createConnection()
-	.then(() => {
-		console.log(`it's done!`);
-	})
-	.catch((error) => console.log(error));
-
+  .then(() => {
+    console.log(`it's done!`);
+  })
+  .catch((error) => console.log(error));
 
 app.listen(port, function () {
   console.log("You are knocking on the heaven from 4000!");
