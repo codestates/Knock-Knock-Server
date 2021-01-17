@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import "reflect-metadata";
 import * as routes from "./routes";
@@ -11,10 +10,10 @@ require("dotenv").config();
 // 라우터 셋팅
 const profileRouter = require("./routes/profile");
 const postsRouter = require("./routes/posts");
+const commentsRouter = require("./routes/comments");
+const searchRouter = require("./routes/search");
 const diaryRouter = require("./routes/diary");
-// const commentsRouter = require("./routes/comments");
-// const searchRouter = require("./routes/search");
-// const joinRouter = require("./routes/join");
+const joinRouter = require("./routes/join");
 // const oauthRouter = require("./routes/oauth");
 
 const app = express();
@@ -32,9 +31,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/profile", routes.profile);
 app.use("/posts", routes.posts);
+app.use("/comments", routes.comments);
+app.use("/search", routes.search);
 app.use("/diary", routes.diary);
-// app.use("/comments", commentsRouter);
-// app.use("/search", searchRouter);
 app.use("/join", routes.join);
 // app.use("/oauth", oauthRouter);
 
