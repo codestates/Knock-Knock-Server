@@ -1,9 +1,16 @@
 /** @format */
 import * as profileController from "./profile";
 import * as postsController from "./posts"
+import * as searchController from "./search";
+import * as commentsController from "./comments";
 
-export { profileController, postsController };
-  
+export {
+	profileController,
+	postsController,
+	searchController,
+	commentsController,
+};
+
 // module.exports = {
 // profileController: require("./profile"),
 //   postsController: require("./posts"),

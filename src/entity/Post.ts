@@ -74,13 +74,13 @@ export class Post extends BaseEntity {
     .execute()
 }
 
-	static findById(id: string) {
+	static findById(id: number) {
 		return this.createQueryBuilder("post")
 			.where("post.id = :id", { id })
 			.getOne();
 	}
 
-	static JoinTheTable(postid:number, userid: string) {
+	static JoinTheTable(postid: number, userid: string) {
     return this.createQueryBuilder()
 	.relation(Post, "user")
 	.of(postid)

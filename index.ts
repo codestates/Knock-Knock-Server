@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import "reflect-metadata";
 import * as routes from "./routes";
@@ -12,8 +11,8 @@ require("dotenv").config();
 const profileRouter = require("./routes/profile");
 const postsRouter = require("./routes/posts");
 // const diaryRouter = require("./routes/diary");
-// const commentsRouter = require("./routes/comments");
-// const searchRouter = require("./routes/search");
+const commentsRouter = require("./routes/comments");
+const searchRouter = require("./routes/search");
 // const joinRouter = require("./routes/join");
 // const oauthRouter = require("./routes/oauth");
 
@@ -33,8 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/profile", routes.profile);
 app.use("/posts", routes.posts);
 // app.use("/diary", diaryRouter);
-// app.use("/comments", commentsRouter);
-// app.use("/search", searchRouter);
+app.use("/comments", routes.comments);
+app.use("/search", routes.search);
 // app.use("/join", joinRouter);
 // app.use("/oauth", oauthRouter);
 
