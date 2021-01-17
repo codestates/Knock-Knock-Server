@@ -1,70 +1,103 @@
 import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
-  OneToMany,
-  JoinColumn,
+	Column,
+	Entity,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn,
+	ManyToMany,
+	JoinTable,
+	OneToMany,
+	BaseEntity,
 } from "typeorm";
 
-import { Pstack } from "./Pstack";
 import { User } from "./User";
 import { Comment } from "./Comment";
 import { Diary } from "./Diary";
 
 @Entity()
-export class Post {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Post extends BaseEntity {
+	@PrimaryGeneratedColumn()
+	id: number;
 
-  @Column()
-  writer: string;
+	@Column()
+	writer: string;
 
-  @Column()
-  category: string;
+	@Column()
+	category: string;
 
-  @Column()
-  title: string;
+	@Column()
+	title: string;
 
-  @Column()
-  content: string;
+	@Column()
+	content: string;
 
-  @Column({ default: true })
-  open: boolean;
+	@Column({ default: true })
+	open: boolean;
 
-  @CreateDateColumn()
-  created_at: Date;
+	@CreateDateColumn()
+	created_at: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+	@UpdateDateColumn()
+	updated_at: Date;
 
-  @Column({ nullable: true })
-  backend: number;
+	@Column({ nullable: true })
+	backend: number;
 
-  @Column({ nullable: true })
-  frontend: number;
+	@Column({ nullable: true })
+	frontend: number;
 
-  @Column({ nullable: true })
-  total: number;
+	@Column({ nullable: true })
+	total: number;
 
-  @OneToMany(() => Diary, (diary) => diary.post)
-  diary: Diary[];
+	@Column({ nullable: true })
+	post_stacks: string;
 
-  @OneToMany(() => Comment, (comment) => comment.post)
-  comment: Comment[];
+	@OneToMany(() => Diary, (diary) => diary.post)
+	diary: Diary[];
 
-  @ManyToMany(() => Pstack)
-  @JoinTable({
-    name: "post_pstack",
-  })
-  pstack: Pstack[];
+	@OneToMany(() => Comment, (comment) => comment.post)
+	comment: Comment[];
 
-  @ManyToMany(() => User)
-  @JoinTable({
-    name: "post_user",
-  })
-  user: User;
+	@ManyToMany(() => User, (user) => user.id, {
+		cascade: true,
+	})
+	@JoinTable({
+		name: "post_user",
+	})
+	user: User[];
+
+	static writingPost(writer: string, category: string, title: string, content: string, backend:number, frontend:number, total:number, post_stacks: string) {
+    return this.createQueryBuilder("posts")
+    .insert()
+    .into(Post)
+    .values([{writer, category, title, content, backend, frontend, total, post_stacks}])
+    .execute()
+}
+
+	static findById(id: string) {
+		return this.createQueryBuilder("post")
+			.where("post.id = :id", { id })
+			.getOne();
+	}
+
+	static JoinTheTable(postid:number, userid: string) {
+    return this.createQueryBuilder()
+	.relation(Post, "user")
+	.of(postid)
+	.add(userid);
+	}
+
+	static allPost() {
+    return this.createQueryBuilder("post")
+    .getMany();
+	}
+	
+	static openChange(id:string, open: boolean) {
+    return this.createQueryBuilder("post")
+    .update(Post)
+    .set({open})
+    .where("id = :id", {id})
+    .execute()    
+	}
+
 }

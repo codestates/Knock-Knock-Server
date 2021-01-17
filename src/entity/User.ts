@@ -1,3 +1,4 @@
+// import { static } from "express";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,43 +8,83 @@ import {
   OneToMany,
   ManyToMany,
   JoinTable,
+  BaseEntity,
 } from "typeorm";
 import { Comment } from "./Comment";
-import { Ustack } from "./Ustack";
 import { Diary } from "./Diary";
+import { Post } from "./Post";
+
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class User extends BaseEntity {
+	@PrimaryGeneratedColumn()
+	id: number;
 
-  @Column()
-  username: string;
+	@Column()
+	username: string;
 
-  @Column()
-  email: string;
+	@Column()
+	email: string;
 
-  @Column({ nullable: true })
-  persona: string;
+	@Column({ nullable: true })
+	persona: string;
 
-  @Column({ nullable: true })
-  mood: string;
+	@Column({ nullable: true })
+	mood: string;
 
-  @CreateDateColumn()
-  created_at: Date;
+	@Column()
+	user_stacks: string;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+	@CreateDateColumn()
+	created_at: Date;
 
-  @OneToMany(() => Comment, (comment) => comment.user)
-  comment: Comment[];
+	@UpdateDateColumn()
+	updated_at: Date;
 
-  @OneToMany(() => Diary, (diary) => diary.user)
-  diary: Diary[];
+	@OneToMany(() => Comment, (comment) => comment.user)
+	comment: Comment[];
 
-  @ManyToMany(() => Ustack)
-  @JoinTable({
-    name: "user_ustack",
-  })
-  ustack: Ustack[];
+	@OneToMany(() => Diary, (diary) => diary.user)
+	diary: Diary[];
+
+	@ManyToMany(() => Post, (post) => post.id, {
+		cascade: true,
+	})
+	@JoinTable({
+		name: "post_user",
+	})
+	post: Post[];
+
+	static findById(id: string) {
+		return this.createQueryBuilder("user")
+			.where("user.id = :id", { id })
+			.getOne();
+	}
+
+	static findByEmail(email: string) {
+		return this.createQueryBuilder("user")
+			.where("user.email = :email", { email })
+			.getOne();
 }
+
+	static updateUser(
+		id: string,
+		username: string,
+		persona: string,
+		mood: string,
+		user_stacks: string
+	) {
+		return this.createQueryBuilder("user")
+			.update(User)
+			.set({ username, persona, mood, user_stacks })
+			.where("id = :id", { id })
+			.execute();
+	}
+}
+
+
+
+// .insert()
+// .into("user")
+// .values([{ username, email, persona, mood, user_stacks }])
+// .execute();
