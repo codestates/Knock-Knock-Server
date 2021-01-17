@@ -1,45 +1,49 @@
 import {
-	Entity,
-	PrimaryGeneratedColumn,
-	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
-	ManyToOne,
-	JoinColumn,
-	BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  BaseEntity,
 } from "typeorm";
-import {User} from "./User";
-import {Post} from "./Post"
+import { User } from "./User";
+import { Post } from "./Post";
 
 @Entity()
 export class Comment extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
 
-    @Column()
-    writer: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    comment: string;
+  @Column()
+  writer: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+  @Column()
+  comment: string;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+  @CreateDateColumn()
+  created_at: Date;
 
-    @ManyToOne(() => User, (user) => user.comment)
-    @JoinColumn({
-        name: "user_id",
-    })
-    user: User;
+  @UpdateDateColumn()
+  updated_at: Date;
 
-    @ManyToOne(() => Post, (post) => post.comment)
-    @JoinColumn({
-        name: "post_id",
-    })
-    post: Post;
 
+  @ManyToOne(() => User, (user) => user.comment)
+  @JoinColumn({
+      name: "user_id",
+  })
+  user: User;
+
+  @ManyToOne(() => Post, (post) => post.comment)
+  @JoinColumn({
+      name: "post_id",
+  })
+  post: Post;
+
+  
+  
     static getComments(postid: string) {
         return this.createQueryBuilder("comment")
             .innerJoinAndSelect("comment.post", "post")
@@ -88,3 +92,4 @@ export class Comment extends BaseEntity {
     }
 
 }
+

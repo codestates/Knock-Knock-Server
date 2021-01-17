@@ -3,13 +3,11 @@ import * as profileController from "./profile";
 import * as postsController from "./posts"
 import * as searchController from "./search";
 import * as commentsController from "./comments";
+import * as diaryController from "./diary";
+import * as joinController from "./join";
 
-export {
-	profileController,
-	postsController,
-	searchController,
-	commentsController,
-};
+export { profileController, postsController, diaryController, joinController, searchController,
+	commentsController};
 
 // module.exports = {
 // profileController: require("./profile"),
