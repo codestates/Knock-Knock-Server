@@ -1,9 +1,11 @@
 /** @format */
 import * as profileController from "./profile";
-import * as postsController from "./posts"
+import * as postsController from "./posts";
+import * as diaryController from "./diary";
+import * as joinController from "./join";
 
-export { profileController, postsController };
-  
+export { profileController, postsController, diaryController, joinController };
+
 // module.exports = {
 // profileController: require("./profile"),
 //   postsController: require("./posts"),

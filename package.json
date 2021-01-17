@@ -4,7 +4,7 @@
    "description": "",
    "main": "index.ts",
    "scripts": {
-      "start" : "nodemon --exec ts-node index.ts --watch",
+      "start": "nodemon --exec ts-node index.ts --watch",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "repository": {
@@ -43,5 +43,3 @@
       "typescript": "3.3.3333"
    }
 }
-
-

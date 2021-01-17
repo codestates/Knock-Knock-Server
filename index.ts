@@ -11,7 +11,7 @@ require("dotenv").config();
 // 라우터 셋팅
 const profileRouter = require("./routes/profile");
 const postsRouter = require("./routes/posts");
-// const diaryRouter = require("./routes/diary");
+const diaryRouter = require("./routes/diary");
 // const commentsRouter = require("./routes/comments");
 // const searchRouter = require("./routes/search");
 // const joinRouter = require("./routes/join");
@@ -32,10 +32,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/profile", routes.profile);
 app.use("/posts", routes.posts);
-// app.use("/diary", diaryRouter);
+app.use("/diary", routes.diary);
 // app.use("/comments", commentsRouter);
 // app.use("/search", searchRouter);
-// app.use("/join", joinRouter);
+app.use("/join", routes.join);
 // app.use("/oauth", oauthRouter);
 
 createConnection()
