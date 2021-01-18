@@ -143,8 +143,8 @@ dist
 .vscode-test
 
 
-.ormconfig.js
-ormconfig.js
+.ormconfig.json
+ormconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,node
 
