@@ -1,14 +1,14 @@
 // import { static } from "express";
 import {
-	Entity,
-	PrimaryGeneratedColumn,
-	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
-	OneToMany,
-	ManyToMany,
-	JoinTable,
-	BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+  BaseEntity,
 } from "typeorm";
 import { Comment } from "./Comment";
 import { Diary } from "./Diary";

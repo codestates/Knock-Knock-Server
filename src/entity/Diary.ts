@@ -39,8 +39,8 @@ export class Diary extends BaseEntity {
 
   static getDiary(postid: number, userid: number) {
     return this.createQueryBuilder("diary")
-      .leftJoinAndSelect("diary.user", "user")
-      .leftJoinAndSelect("diary.post", "post")
+      .leftJoin("diary.user", "user")
+      .leftJoin("diary.post", "post")
       .where("user.id =:id", { id: userid })
       .andWhere("post.id =:id", { id: postid })
       .getMany();
@@ -60,5 +60,13 @@ export class Diary extends BaseEntity {
 
   static joinPost(id: string, postid: number) {
     return this.createQueryBuilder().relation(Diary, "post").of(id).set(postid);
+  }
+
+  static deleteDiary(id: any) {
+    return this.createQueryBuilder()
+      .delete()
+      .from(Diary)
+      .where("id = :id", { id })
+      .execute();
   }
 }
