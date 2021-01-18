@@ -13,4 +13,7 @@ postsRouter.post("/:id", postsController.writingPost);
 // 1개의 post를 닫는다. 여기서 id는 post_id를 의미한다.
 postsRouter.put("/:id", postsController.closingPost);
 
+//히스토리내 프로젝트 삭제(body에는 postid, userid)
+postsRouter.delete("/history", postsController.deletingHistory);
+
 export default postsRouter;
