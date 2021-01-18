@@ -1,9 +1,8 @@
-// const express = require("express");
-// const oauthRouter = express.Router();
+const express = require("express");
+const oauthRouter = express.Router();
 
-// const { oauthController } = require("../controller");
+const { oauthController } = require("../controller");
 
-// oauthRouter.post("/", oauthController.post);
+oauthRouter.post("/", oauthController.oauthLogin);
 
-// export default oauthRouter;
-// /
+export default oauthRouter;

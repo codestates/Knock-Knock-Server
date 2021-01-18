@@ -5,6 +5,7 @@ import * as searchController from "./search";
 import * as commentsController from "./comments";
 import * as diaryController from "./diary";
 import * as joinController from "./join";
+import * as oauthController from "./oauth";
 
 export {
   profileController,
@@ -13,6 +14,7 @@ export {
   joinController,
   searchController,
   commentsController,
+  oauthController,
 };
 
 // module.exports = {

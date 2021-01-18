@@ -1,16 +1,33 @@
 import express from "express";
 import * as routes from "./routes";
 import session from "express-session";
+import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
 
-import cors from "cors";
-import * as dotenv from "dotenv";
-import { createConnection } from "typeorm";
-dotenv.config();
-//  const nodeSchedule = require("node-schedule");
-// import "reflect-metadata";
+const fs = require("fs");
+const http = require("http");
+const https = require("https");
+
+const privateKey = fs.readFileSync("./key.pem", "utf8");
+const certificate = fs.readFileSync("./cert.pem", "utf8");
+const credentials = { key: privateKey, cert: certificate };
 
 const app = express();
 const port = 4000;
+// app.use(cookieParser());
+app.use(bodyParser.json());
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+httpServer.listen(8080);
+httpsServer.listen(port);
+
+import cors from "cors";
+import { createConnection } from "typeorm";
+import * as dotenv from "dotenv";
+dotenv.config();
+//  const nodeSchedule = require("node-schedule");
+// import "reflect-metadata";
 
 app.use(
   session({
@@ -18,13 +35,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    rolling: true,
     cookie: {
-      path: "/",
       sameSite: "none",
       httpOnly: true,
-      maxAge: 60000 * 30, // 30분
-      secure: true, //s 만 받으려면
+      maxAge: 60000 * 30,
+      secure: true,
     },
   })
 );
@@ -46,7 +61,7 @@ app.use("/comments", routes.comments);
 app.use("/search", routes.search);
 app.use("/diary", routes.diary);
 app.use("/join", routes.join);
-// app.use("/oauth", oauthRouter);
+app.use("/oauth", routes.oauth);
 
 // 데이터베이스 연결
 createConnection()
@@ -56,8 +71,8 @@ createConnection()
   .catch((error) => console.log(error));
 
 //
-app.listen(port, function () {
-  console.log("You are knocking on the heaven from 4000!");
-});
+// app.listen(port, function () {
+//   console.log("You are knocking on the heaven from 4000!");
+// });
 
 module.exports = app;
