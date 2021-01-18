@@ -3,14 +3,13 @@ import { Request, Response, NextFunction } from "express";
 import { Diary } from "../../src/entity/Diary";
 
 export default async (req: Request, res: Response): Promise<void> => {
-  const { postid, userid } = req.body;
+  const { diaryid, postid, userid } = req.body;
 
+  const result = await Diary.deleteDiary(diaryid);
   const diaryResult = await Diary.getDiary(postid, userid);
-
-  console.log(diaryResult);
-  if (diaryResult) {
+  if (result) {
     res.status(200).send({ data: diaryResult });
   } else {
-    res.status(404).send({ message: "diary not found!" });
+    res.status(404).send({ message: "delete diary failed" });
   }
 };

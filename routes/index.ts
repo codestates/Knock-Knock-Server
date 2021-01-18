@@ -6,4 +6,4 @@ import comments from "./comments";
 import diary from "./diary";
 import join from "./join";
 
-export { profile, posts, search, comments, diary, join  };
+export { profile, posts, search, comments, diary, join };
