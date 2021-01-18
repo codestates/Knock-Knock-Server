@@ -1,23 +1,33 @@
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import "reflect-metadata";
 import * as routes from "./routes";
-import { createConnection } from "typeorm";
-require("dotenv").config();
-//  const nodeSchedule = require("node-schedule");
+import session from "express-session";
 
-// 라우터 셋팅
-const profileRouter = require("./routes/profile");
-const postsRouter = require("./routes/posts");
-const commentsRouter = require("./routes/comments");
-const searchRouter = require("./routes/search");
-const diaryRouter = require("./routes/diary");
-const joinRouter = require("./routes/join");
-// const oauthRouter = require("./routes/oauth");
+import cors from "cors";
+import * as dotenv from "dotenv";
+import { createConnection } from "typeorm";
+dotenv.config();
+//  const nodeSchedule = require("node-schedule");
+// import "reflect-metadata";
 
 const app = express();
 const port = 4000;
+
+app.use(
+  session({
+    proxy: true,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    rolling: true,
+    cookie: {
+      path: "/",
+      sameSite: "none",
+      httpOnly: true,
+      maxAge: 60000 * 30, // 30분
+      secure: true, //s 만 받으려면
+    },
+  })
+);
 
 const options: cors.CorsOptions = {
   credentials: true,
@@ -26,6 +36,7 @@ const options: cors.CorsOptions = {
 };
 
 app.use(cors(options));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -37,12 +48,14 @@ app.use("/diary", routes.diary);
 app.use("/join", routes.join);
 // app.use("/oauth", oauthRouter);
 
+// 데이터베이스 연결
 createConnection()
   .then(() => {
     console.log(`it's done!`);
   })
   .catch((error) => console.log(error));
 
+//
 app.listen(port, function () {
   console.log("You are knocking on the heaven from 4000!");
 });
