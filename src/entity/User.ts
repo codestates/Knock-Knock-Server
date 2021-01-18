@@ -31,7 +31,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   mood: string;
 
-  @Column()
+  @Column({ nullable: true })
   user_stacks: string;
 
   @CreateDateColumn()
@@ -77,6 +77,13 @@ export class User extends BaseEntity {
       .update(User)
       .set({ username, persona, mood, user_stacks })
       .where("id = :id", { id })
+      .execute();
+  }
+  static signup(email: string, username: string) {
+    return this.createQueryBuilder()
+      .insert()
+      .into(User)
+      .values({ username, email })
       .execute();
   }
 }

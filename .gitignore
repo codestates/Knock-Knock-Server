@@ -146,5 +146,10 @@ dist
 .ormconfig.json
 ormconfig.json
 
+cert.pem
+.cert.pem
+
+key.pem
+.key.pem
 # End of https://www.toptal.com/developers/gitignore/api/macos,node
 
