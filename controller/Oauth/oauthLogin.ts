@@ -49,7 +49,6 @@ export default async (
             // console.log("첫번째 userid", req.session.userid);
             // console.log("두번째: " + result);
             // console.log("두번째 id: " + result.id);
-            req.session.userid = "potato";
 
             // req.session.userid = result.id;
             res.status(201).send({ data: result });
@@ -58,13 +57,11 @@ export default async (
           } else {
             await User.signup(data.email, data.name);
             const newResult = await User.findByEmail(data.email);
-            req.session.userid = "potatiiiiiiiiiiiiiiiiiiiiii";
             res.status(201).send({ data: newResult }); // 여기서 리다이렉션
           }
         })
         .catch((error) => console.log(error));
     });
-  req.session.userid = "potatiiiiiiiiiiiiiiiiiiiiii";
 };
 
 // if (req.body.oauth === "google") {
