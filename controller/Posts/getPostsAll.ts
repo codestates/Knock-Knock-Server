@@ -6,9 +6,7 @@ import { Post } from "../../src/entity/Post";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const postResult = await Post.allPost();
-  console.log("왔냐?: " + req.session.userid);
 
-  // console.log("req : ", req);
   if (postResult) {
     res.status(200).send({ data: postResult });
   } else {
