@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+// import { Express } from "express-session";
 import axios from "axios";
 import { User } from "../../src/entity/User";
 import * as session from "express-session";
@@ -10,10 +11,11 @@ export default async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
+  console.log("세션 불러왔냐?", session);
   // Google Oauth
   const clientID = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  console.log(req.body);
+  // console.log(req.body);
 
   await axios({
     method: "POST",
@@ -41,25 +43,28 @@ export default async (
         })
         .then(async (response) => {
           const { data } = response;
-          console.log(data);
           const result = await User.findByEmail(data.email);
-          console.log(result);
+          // console.log(result);
           if (result) {
-            req.session.save(() => {
-              req.session.userid = result.id;
-              res.status(200).send({ data: result }); // 여기서 리다이렉션
-            });
+            // console.log("첫번째 userid", req.session.userid);
+            // console.log("두번째: " + result);
+            // console.log("두번째 id: " + result.id);
+            req.session.userid = "potato";
+
+            // req.session.userid = result.id;
+            res.status(201).send({ data: result });
+
+            // console.log("두번째 userid", req.session.userid);
           } else {
             await User.signup(data.email, data.name);
             const newResult = await User.findByEmail(data.email);
-            req.session.save(() => {
-              req.session.userid = newResult.id;
-              res.status(201).send({ data: newResult }); // 여기서 리다이렉션
-            });
+            req.session.userid = "potatiiiiiiiiiiiiiiiiiiiiii";
+            res.status(201).send({ data: newResult }); // 여기서 리다이렉션
           }
         })
         .catch((error) => console.log(error));
     });
+  req.session.userid = "potatiiiiiiiiiiiiiiiiiiiiii";
 };
 
 // if (req.body.oauth === "google") {
