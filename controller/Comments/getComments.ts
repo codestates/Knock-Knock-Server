@@ -4,13 +4,17 @@ import { Comment } from "../../src/entity/Comment";
 
 export default async (req: Request, res: Response): Promise<void> => {
 
-    const { postid } = req.body
-    const commentResult = await Comment.getComments(postid);
+	const { postid } = req.body
+	console.log(req.session.userid)
+	if (req.session.userid) {
+		
+		const commentResult = await Comment.getComments(postid);
 
-    if (commentResult) {
+		if (commentResult) {
 			console.log(commentResult);
 			res.status(200).send({ data: commentResult });
 		} else {
 			res.status(404).send({ message: "getting comments failed" });
 		}
+	}
 }
