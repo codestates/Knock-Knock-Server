@@ -14,6 +14,6 @@ postsRouter.post("/:id", postsController.writingPost);
 postsRouter.put("/:id", postsController.closingPost);
 
 //히스토리내 프로젝트 삭제(body에는 postid, userid)
-postsRouter.delete("/history", postsController.deletingHistory);
+postsRouter.delete("/", postsController.deletingHistory);
 
 export default postsRouter;

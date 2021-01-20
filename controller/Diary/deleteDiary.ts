@@ -5,6 +5,7 @@ import { Diary } from "../../src/entity/Diary";
 export default async (req: Request, res: Response): Promise<void> => {
   const { diaryid, postid, userid } = req.body;
 
+  if(req.session.userid) {
   const result = await Diary.deleteDiary(diaryid);
   const diaryResult = await Diary.getDiary(postid, userid);
   if (result) {
@@ -12,4 +13,5 @@ export default async (req: Request, res: Response): Promise<void> => {
   } else {
     res.status(404).send({ message: "delete diary failed" });
   }
+}
 };

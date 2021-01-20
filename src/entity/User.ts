@@ -88,7 +88,4 @@ export class User extends BaseEntity {
   }
 }
 
-// .insert()
-// .into("user")
-// .values([{ username, email, persona, mood, user_stacks }])
-// .execute();
+

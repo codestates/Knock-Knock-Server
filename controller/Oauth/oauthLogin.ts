@@ -28,7 +28,7 @@ export default async (
       client_secret: clientSecret,
       code: req.body.authorizationCode,
       grant_type: "authorization_code",
-      redirect_uri: "http://localhost:3000/users",
+      redirect_uri: "http://localhost:3000/mngAccount",
     },
   })
     .then((response) => {
@@ -44,16 +44,8 @@ export default async (
         .then(async (response) => {
           const { data } = response;
           const result = await User.findByEmail(data.email);
-          // console.log(result);
           if (result) {
-            // console.log("첫번째 userid", req.session.userid);
-            // console.log("두번째: " + result);
-            // console.log("두번째 id: " + result.id);
-
-            // req.session.userid = result.id;
             res.status(201).send({ data: result });
-
-            // console.log("두번째 userid", req.session.userid);
           } else {
             await User.signup(data.email, data.name);
             const newResult = await User.findByEmail(data.email);

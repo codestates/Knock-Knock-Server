@@ -4,66 +4,36 @@ import session = require("express-session");
 import * as bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
-// const fs = require("fs");
-// const http = require("http");
-// const https = require("https");
+const fs = require("fs");
+const http = require("http");
+const https = require("https");
 
-// const privateKey = fs.readFileSync("./key.pem", "utf8");
-// const certificate = fs.readFileSync("./cert.pem", "utf8");
-// const credentials = { key: privateKey, cert: certificate };
-
-// const mysqlStore = require("express-mysql-session")(session);
-// const optionsForStorage = {
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_PORT,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_NAME,
-// };
+const privateKey = fs.readFileSync("./key.pem", "utf8");
+const certificate = fs.readFileSync("./cert.pem", "utf8");
+const credentials = { key: privateKey, cert: certificate };
 
 const app = express();
 const port = 4000;
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-// var httpServer = http.createServer(app);
-// var httpsServer = https.createServer(credentials, app);
-// httpServer.listen(8080);
-// httpsServer.listen(port);
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(port);
 
 import cors from "cors";
 import { createConnection } from "typeorm";
 import * as dotenv from "dotenv";
 dotenv.config();
-//  const nodeSchedule = require("node-schedule");
-// import "reflect-metadata";
-// const sessionStorage = new mysqlStore(optionsForStorage);
 
-app.set("trust proxy", 1);
-app.use(
-  session({
-    // proxy: true,
-    secret: 'aaa',
-    resave: false,
-    saveUninitialized: true,
-    // store: sessionStorage,
-    cookie: {
-      path: "/",
-      // sameSite: "none",
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-      // secure: true,
-    },
-  })
-);
 
 const options: cors.CorsOptions = {
   origin: true,
   credentials: true,
-  methods: ["GET,POST"],
+  methods: ["GET,POST,OPTIONS, PUT, DELETE"],
 };
 
 app.use(cors(options));
+
 app.use(
   session({
     proxy: true,
@@ -71,6 +41,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
+      secure: true,
       httpOnly: true,
       maxAge: 24 * 6 * 60 * 10000,
     },
@@ -95,8 +66,9 @@ createConnection()
   })
   .catch((error) => console.log(error));
 
-app.listen(port, function () {
-  console.log("You are knocking on the heaven from 4000!");
-});
 
-module.exports = app;
+// app.listen(port, function () {
+//   console.log("You are knocking on the heaven from 4000!");
+// });
+
+module.exports = httpsServer;
