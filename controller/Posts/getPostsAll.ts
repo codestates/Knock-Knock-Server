@@ -5,8 +5,9 @@ import { User } from "../../src/entity/User";
 import { Post } from "../../src/entity/Post";
 
 export default async (req: Request, res: Response): Promise<void> => {
+  const { userid } = req.session;
 
-  if (req.session.userid) {
+  if (userid) {
     const postResult = await Post.allPost();
 
     if (postResult) {

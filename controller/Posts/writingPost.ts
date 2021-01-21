@@ -15,10 +15,9 @@ export default async (req: Request, res: Response): Promise<void> => {
     total,
     post_stacks,
   } = req.body;
-  const { id } = req.params;
-    
+  const { userid } = req.session;
 
-  if (req.session.userid) {
+  if (userid) {
     const newPost = await Post.writingPost(
       writer,
       category,
@@ -32,7 +31,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     const postResult = await Post.allPost();
 
     if (newPost) {
-      await Post.JoinTheTable(newPost.identifiers[0].id, id);
+      await Post.JoinTheTable(newPost.identifiers[0].id, userid);
       res.status(200).send({ data: postResult });
     } else {
       res.status(404).send({ message: "post failed" });

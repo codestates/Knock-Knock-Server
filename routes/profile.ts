@@ -5,6 +5,6 @@ const { profileController } = require("../controller");
 router.get("/:id", profileController.getUserInfo);
 
 //유저의 프로필을 수정한다.
-router.post("/:id", profileController.updateUser);
+router.post("/", profileController.updateUser);
 
 export default router;
