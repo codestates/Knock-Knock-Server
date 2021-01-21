@@ -133,6 +133,14 @@ export class Post extends BaseEntity {
       .execute();
   }
 
+  static makeClosed(id: string) {
+    return this.createQueryBuilder("post")
+      .update(Post)
+      .set({ open: false })
+      .where("id = :id", { id })
+      .execute();
+  }
+
   static changeNum(id: number, backend: number, frontend: number) {
     return this.createQueryBuilder()
       .update(Post)

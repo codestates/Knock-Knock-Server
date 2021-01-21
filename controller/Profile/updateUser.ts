@@ -5,10 +5,10 @@ import { User } from "../../src/entity/User";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { username, persona, mood, user_stacks } = req.body;
-  const { id } = req.params;
-  if (req.session.userid) {
+  const { userid } = req.session;
+  if (userid) {
     const postUserInfo = await User.updateUser(
-      id,
+      userid,
       username,
       persona,
       mood,
@@ -16,7 +16,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     );
 
     if (postUserInfo) {
-      const userData = await User.findById(req.params.id);
+      const userData = await User.findById(userid);
       res.status(201).send({ data: userData });
     } else {
       res.status(404).send({ message: "user cannot be updated" });

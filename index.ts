@@ -25,7 +25,6 @@ import { createConnection } from "typeorm";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-
 const options: cors.CorsOptions = {
   origin: true,
   credentials: true,
@@ -37,7 +36,7 @@ app.use(cors(options));
 app.use(
   session({
     proxy: true,
-    secret: process.env.SESSION_SECRET,
+    secret: "covid",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -65,7 +64,6 @@ createConnection()
     console.log(`it's done!`);
   })
   .catch((error) => console.log(error));
-
 
 // app.listen(port, function () {
 //   console.log("You are knocking on the heaven from 4000!");
