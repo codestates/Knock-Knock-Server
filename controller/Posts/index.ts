@@ -1,6 +1,4 @@
-/** @format */
-
-import getPostsAll from "./getPostsAll";
+ import getPostsAll from "./getPostsAll";
 import writingPost from "./writingPost";
 import closingPost from "./closingPost";
 import deletingHistory from "./deletingHistory";

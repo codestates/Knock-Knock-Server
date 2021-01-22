@@ -1,7 +1,4 @@
-/** @format */
-import { getConnection } from "typeorm";
 import { Request, Response, NextFunction } from "express";
-import { User } from "../../src/entity/User";
 import { Post } from "../../src/entity/Post";
 
 export default async (req: Request, res: Response): Promise<void> => {
@@ -38,5 +35,3 @@ export default async (req: Request, res: Response): Promise<void> => {
     }
   }
 };
-
-// "start": "nodemon --exec ts-node index.ts",

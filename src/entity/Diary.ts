@@ -37,19 +37,17 @@ export class Diary extends BaseEntity {
   })
   post: Post;
 
+  // 특정 게시물에 해당되는 회고를 가져온다. 
   static getDiary(postid: string, userid: string) {
     return (
       this.createQueryBuilder("diary")
         .leftJoin("diary.user", "user")
         .innerJoin("diary.post", "post")
-        // .where("post.id = :id", { id: postid })
-        // .andWhere("user.id = :id", { id: userid })
         .getMany()
     );
   }
-  //select * from diary inner join user on user.id = diary.user_id
-  // inner join post on post.id = diary.post_id
 
+  // 회고를 작성한다.
   static writeDiary(content: string) {
     return this.createQueryBuilder()
       .insert()
@@ -58,14 +56,23 @@ export class Diary extends BaseEntity {
       .execute();
   }
 
+  // 유저와 조인 관계를 맺는다.
   static joinUser(id: string, userid: number) {
-    return this.createQueryBuilder().relation(Diary, "user").of(id).set(userid);
+    return this.createQueryBuilder()
+    .relation(Diary, "user")
+    .of(id)
+    .set(userid);
   }
 
+  // 게시물과 조인관계를 맺는다.
   static joinPost(id: string, postid: number) {
-    return this.createQueryBuilder().relation(Diary, "post").of(id).set(postid);
+    return this.createQueryBuilder()
+    .relation(Diary, "post")
+    .of(id)
+    .set(postid);
   }
 
+  //회고를 삭제한다. 
   static deleteDiary(id: any) {
     return this.createQueryBuilder()
       .delete()

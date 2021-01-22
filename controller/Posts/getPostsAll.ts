@@ -1,7 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Session } from "express-session";
-
-import { User } from "../../src/entity/User";
 import { Post } from "../../src/entity/Post";
 
 export default async (req: Request, res: Response): Promise<void> => {
