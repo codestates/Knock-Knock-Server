@@ -10,6 +10,7 @@ import {
   JoinTable,
   BaseEntity,
 } from "typeorm";
+
 import { Comment } from "./Comment";
 import { Diary } from "./Diary";
 import { Post } from "./Post";
@@ -54,18 +55,21 @@ export class User extends BaseEntity {
   })
   post: Post[];
 
+  //세션 userid로 유저 데이터를 검색한다.
   static findById(id: string) {
     return this.createQueryBuilder("user")
       .where("user.id = :id", { id })
       .getOne();
   }
 
+  //최초 oauth로그인 시, 이메일로 로그인 여부를 확인한다.
   static findByEmail(email: string) {
     return this.createQueryBuilder("user")
       .where("user.email = :email", { email })
       .getOne();
   }
-
+ 
+  //유저의 프로필 정보를 업데이트(수정)한다.
   static updateUser(
     id: string,
     username: string,
@@ -79,6 +83,8 @@ export class User extends BaseEntity {
       .where("id = :id", { id })
       .execute();
   }
+  
+  // 로그인 이력이 없으면, 회원가입을 진행한다. 
   static signup(email: string, username: string) {
     return this.createQueryBuilder()
       .insert()

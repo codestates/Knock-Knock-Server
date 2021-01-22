@@ -5,9 +5,11 @@ import { User } from "../../src/entity/User";
 export default async (req: Request, res: Response): Promise<void> => {
   const { commentid, postid } = req.body;
   const { userid } = req.session;
+
   if (userid) {
     const validation = await User.findById(userid);
     const aResult = await Comment.getAComment(commentid);
+
     if (validation.username === aResult.writer) {
       const result = await Comment.deleteComment(commentid);
       const lists = await Comment.getComments(postid);

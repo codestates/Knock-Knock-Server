@@ -66,6 +66,7 @@ export class Post extends BaseEntity {
   })
   user: User[];
 
+  //게시물을 작성한다.
   static writingPost(
     writer: string,
     category: string,
@@ -94,12 +95,14 @@ export class Post extends BaseEntity {
       .execute();
   }
 
+  //게시글의 id로 1개의 게시글을 검색한다.
   static findById(id: string) {
     return this.createQueryBuilder("post")
       .where("post.id = :id", { id })
       .getOne();
   }
 
+  // 유저와 게시물의 조인테이블을 연결한다.
   static JoinTheTable(postid: any, userid: any) {
     return this.createQueryBuilder()
       .relation(Post, "user")
@@ -107,6 +110,7 @@ export class Post extends BaseEntity {
       .add(userid);
   }
 
+  // 유저와 게시물의 조인테이블 연결을 해제한다. 
   static unjoinTheTable(postid: any, userid: any) {
     return this.createQueryBuilder()
       .relation(Post, "user")
@@ -114,6 +118,7 @@ export class Post extends BaseEntity {
       .remove(userid);
   }
 
+  // 유저와 조인되어있는 게시물을 가져온다.
   static getUserPost(userid: any) {
     return this.createQueryBuilder("post")
       .leftJoin("post.user", "user")
@@ -121,10 +126,12 @@ export class Post extends BaseEntity {
       .getMany();
   }
 
+  // 모든 게시물을 가져온다.
   static allPost() {
     return this.createQueryBuilder("post").getMany();
   }
 
+  // 게시물의 상태를 closed로 변경한다.
   static openChange(id: string, open: boolean) {
     return this.createQueryBuilder("post")
       .update(Post)
@@ -133,7 +140,8 @@ export class Post extends BaseEntity {
       .execute();
   }
 
-  static makeClosed(id: string) {
+  // 게시물의 상태를 무조건 false로 만든다. 
+  static makeClosed(id: any) {
     return this.createQueryBuilder("post")
       .update(Post)
       .set({ open: false })
@@ -141,6 +149,7 @@ export class Post extends BaseEntity {
       .execute();
   }
 
+  // 포지션 지원 인원을 변경한다.
   static changeNum(id: number, backend: number, frontend: number) {
     return this.createQueryBuilder()
       .update(Post)

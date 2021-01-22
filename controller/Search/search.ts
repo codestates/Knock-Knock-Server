@@ -1,5 +1,3 @@
-/** @format */
-
 import { Request, Response, NextFunction } from "express";
 import { Post } from "../../src/entity/Post";
 import { getConnection } from "typeorm";

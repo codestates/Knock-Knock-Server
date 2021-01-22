@@ -1,5 +1,4 @@
-/** @format */
-import { Request, Response, NextFunction } from "express";
+ import { Request, Response, NextFunction } from "express";
 import { User } from "../../src/entity/User";
 import { Post } from "../../src/entity/Post";
 

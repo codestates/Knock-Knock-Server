@@ -10,7 +10,7 @@ export default async (req: Request, res: Response): Promise<void> => {
 
     await Comment.joinUser(results.identifiers[0].id, userid);
     await Comment.joinPost(results.identifiers[0].id, postid);
-    //const AComment = await Comment.findById(results.identifiers[0].id);
+
     const allComments = await Comment.getComments(postid);
 
     if (allComments) {

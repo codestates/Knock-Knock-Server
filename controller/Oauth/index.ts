@@ -1,5 +1,3 @@
-/** @format */
-
-import oauthLogin from "./oauthLogin";
+ import oauthLogin from "./oauthLogin";
 
 export { oauthLogin };

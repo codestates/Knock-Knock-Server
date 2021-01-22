@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Post } from "../../src/entity/Post";
 
-// /history - body에 postid, userid
 export default async (req: Request, res: Response): Promise<void> => {
   const { postid } = req.body;
   const { userid } = req.session;

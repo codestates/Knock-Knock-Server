@@ -40,21 +40,22 @@ export class Comment extends BaseEntity {
 	})
 	post: Post;
 
+	// 해당하는 게시물의 댓글을 가져온다.
 	static getComments(postid: any) {
 		return this.createQueryBuilder("comment")
 			.innerJoin("comment.post", "post")
 			.where("post.id = :id", { id: postid })
 			.getMany();
-		// mysql> select * from comment inner join post on comment.post_id = post.id;
 	}
 
+	//특정 1개의 댓글을 가져온다. 
 	static getAComment(commentid: any) {
 		return this.createQueryBuilder("comment")
 			.where("comment.id = :id", { id: commentid })
 			.getOne();
-		// mysql> select * from comment inner join post on comment.post_id = post.id;
 	}
 
+	// 댓글을 작성한다.
 	static postComments(writer: string, comment: string) {
 		return this.createQueryBuilder()
 			.insert()
@@ -63,12 +64,15 @@ export class Comment extends BaseEntity {
 			.execute();
 	}
 
+	//댓글과 유저의 조인관계를 맺는다. 
 	static joinUser(id: any, userid: any) {
 		return this.createQueryBuilder()
 			.relation(Comment, "user")
 			.of(id)
 			.set(userid);
 	}
+	
+	// 게시물과 조인 관계를 맺는다.
 	static joinPost(id: any, postid: any) {
 		return this.createQueryBuilder()
 			.relation(Comment, "post")
@@ -76,6 +80,7 @@ export class Comment extends BaseEntity {
 			.set(postid);
 	}
 
+	//특정 코멘트 1개를 가져온다. 
 	static findById(id: number) {
 		return this.createQueryBuilder("comment")
 			.where("comment.id = :id", { id })

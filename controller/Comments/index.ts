@@ -1,6 +1,4 @@
-/** @format */
-
-import getComments from "./getComments";
+ import getComments from "./getComments";
 import postComments from "./postComments";
 import deleteComment from "./deleteComment";
 

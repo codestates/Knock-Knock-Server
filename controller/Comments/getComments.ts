@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { getComments } from ".";
 import { Comment } from "../../src/entity/Comment";
 
 export default async (req: Request, res: Response): Promise<void> => {

@@ -1,5 +1,3 @@
-/** @format */
-
-import joinGroup from "./joinGroup";
+ import joinGroup from "./joinGroup";
 
 export { joinGroup };
