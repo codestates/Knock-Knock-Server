@@ -1,8 +1,8 @@
- import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { Diary } from "../../src/entity/Diary";
 
 export default async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params; //postid
+  const { id } = req.params;
   const { userid } = req.session;
 
   if (userid) {
@@ -12,5 +12,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     } else {
       res.status(404).send({ message: "diary not found!" });
     }
+  } else {
+    res.status(404).send({ message: "userid not found!" });
   }
 };

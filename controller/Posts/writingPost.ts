@@ -33,5 +33,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     } else {
       res.status(404).send({ message: "post failed" });
     }
+  } else {
+    res.status(404).send({ message: "userid not found!" });
   }
 };

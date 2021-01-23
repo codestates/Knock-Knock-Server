@@ -1,4 +1,4 @@
- import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { User } from "../../src/entity/User";
 import { Post } from "../../src/entity/Post";
 
@@ -12,7 +12,9 @@ export default async (req: Request, res: Response): Promise<void> => {
     if (userData) {
       res.status(200).send({ userdata: userData, postdata: userPostData });
     } else {
-      res.status(404).send({ message: "User not found."})
+      res.status(404).send({ message: "User not found." });
     }
+  } else {
+    res.status(404).send({ message: "userid not found!" });
   }
 };
