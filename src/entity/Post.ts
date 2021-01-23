@@ -110,7 +110,7 @@ export class Post extends BaseEntity {
       .add(userid);
   }
 
-  // 유저와 게시물의 조인테이블 연결을 해제한다. 
+  // 유저와 게시물의 조인테이블 연결을 해제한다.
   static unjoinTheTable(postid: any, userid: any) {
     return this.createQueryBuilder()
       .relation(Post, "user")
@@ -140,7 +140,7 @@ export class Post extends BaseEntity {
       .execute();
   }
 
-  // 게시물의 상태를 무조건 false로 만든다. 
+  // 게시물의 상태를 무조건 false로 만든다.
   static makeClosed(id: any) {
     return this.createQueryBuilder("post")
       .update(Post)
@@ -154,6 +154,15 @@ export class Post extends BaseEntity {
     return this.createQueryBuilder()
       .update(Post)
       .set({ backend, frontend })
+      .where("id = :id", { id })
+      .execute();
+  }
+
+  // total 인원을 변경한다.
+  static changeTotal(id: number, total: number) {
+    return this.createQueryBuilder()
+      .update(Post)
+      .set({ total })
       .where("id = :id", { id })
       .execute();
   }

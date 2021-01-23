@@ -22,5 +22,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     } else {
       res.status(404).send({ message: "it's not allowed to you" });
     }
+  } else {
+    res.status(404).send({ message: "userid not found!" });
   }
 };

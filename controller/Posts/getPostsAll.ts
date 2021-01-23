@@ -12,5 +12,7 @@ export default async (req: Request, res: Response): Promise<void> => {
     } else {
       res.status(404).send({ message: "post not found" });
     }
+  } else {
+    res.status(404).send({ message: "userid not found!" });
   }
 };
