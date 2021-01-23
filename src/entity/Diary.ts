@@ -38,13 +38,13 @@ export class Diary extends BaseEntity {
   post: Post;
 
   // 특정 게시물에 해당되는 회고를 가져온다. 
-  static getDiary(postid: string, userid: string) {
-    return (
-      this.createQueryBuilder("diary")
-        .leftJoin("diary.user", "user")
-        .innerJoin("diary.post", "post")
-        .getMany()
-    );
+  static getDiary(postid: any, userid: any) {
+    return this.createQueryBuilder("diary")
+			.innerJoin("diary.post", "post")
+			.innerJoin("diary.user", "user")
+			.where("diary.post_id = :post_id", { post_id: postid })
+			.andWhere("diary.user_id = :user_id", { user_id: userid })
+			.getMany();
   }
 
   // 회고를 작성한다.
