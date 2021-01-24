@@ -39,7 +39,7 @@ app.use(cors(options));
 app.use(
   session({
     proxy: true,
-    secret: "covid",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {

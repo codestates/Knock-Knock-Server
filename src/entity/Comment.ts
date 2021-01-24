@@ -40,12 +40,13 @@ export class Comment extends BaseEntity {
   })
   post: Post;
 
+  // 해당 게시물의 댓글과 댓글의 유저정보를 가져온다.
   static getComments(postid: any) {
     return this.createQueryBuilder("comment")
-			.innerJoinAndSelect("comment.post", "post")
-			.innerJoinAndSelect("comment.user", "user")
-			.where("comment.post_id = :post_id", { post_id: postid })
-			.getMany();
+      .innerJoinAndSelect("comment.post", "post")
+      .innerJoinAndSelect("comment.user", "user")
+      .where("comment.post_id = :post_id", { post_id: postid })
+      .getMany();
   }
 
   //특정 1개의 댓글을 가져온다.
