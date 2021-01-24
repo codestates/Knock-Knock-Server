@@ -6,7 +6,7 @@ import { createConnection } from "typeorm";
 import { Post } from "./src/entity/Post";
 
 import * as dotenv from "dotenv";
-import * as routes from "./routes";
+import * as routes from "./src/routes";
 import * as bodyParser from "body-parser";
 
 dotenv.config();
