@@ -42,9 +42,10 @@ export class Comment extends BaseEntity {
 
   static getComments(postid: any) {
     return this.createQueryBuilder("comment")
-      .innerJoin("comment.post", "post")
-      .where("comment.post_id = :post_id", { post_id: postid })
-      .getMany();
+			.innerJoinAndSelect("comment.post", "post")
+			.innerJoinAndSelect("comment.user", "user")
+			.where("comment.post_id = :post_id", { post_id: postid })
+			.getMany();
   }
 
   //특정 1개의 댓글을 가져온다.
