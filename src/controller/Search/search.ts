@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Post } from "../../src/entity/Post";
+import { Post } from "../../entity/Post";
 import { getConnection } from "typeorm";
 
 export default async (req: Request, res: Response): Promise<void> => {
