@@ -4,7 +4,6 @@ import { Post } from "../../src/entity/Post";
 export default async (req: Request, res: Response): Promise<void> => {
   const { userid } = req.session;
 
-  if (userid) {
     const postResult = await Post.allPost();
 
     if (postResult) {
@@ -12,7 +11,5 @@ export default async (req: Request, res: Response): Promise<void> => {
     } else {
       res.status(404).send({ message: "post not found" });
     }
-  } else {
-    res.status(404).send({ message: "userid not found!" });
-  }
+  
 };
