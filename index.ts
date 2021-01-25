@@ -3,7 +3,7 @@ import express = require ("express");
 import cookieParser = require ("cookie-parser");
 import session = require("express-session");
 import { createConnection } from "typeorm";
-import Post  from "./src/entity/Post";
+import Post from "./src/entity/Post";
 
 import * as dotenv from "dotenv";
 import * as routes from "./src/routes";
@@ -92,6 +92,10 @@ const postClosedSchedule = nodeSchedule.scheduleJob(
     // 그러면 우리는 open => false변경을 한다.
   }
 );
+
+app.get("/", (req: express.Request, res: express.Response) => {
+  res.send("Hello World")
+})
 
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port);
