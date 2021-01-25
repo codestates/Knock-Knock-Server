@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Diary } from "../../entity/Diary";
+import Diary from "../../entity/Diary";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { diaryid, postid } = req.body;
