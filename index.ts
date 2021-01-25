@@ -1,9 +1,9 @@
-import cors from "cors";
-import express from "express";
-import cookieParser from "cookie-parser";
+import cors = require ("cors");
+import express = require ("express");
+import cookieParser = require ("cookie-parser");
 import session = require("express-session");
 import { createConnection } from "typeorm";
-import { Post } from "./src/entity/Post";
+import Post  from "./src/entity/Post";
 
 import * as dotenv from "dotenv";
 import * as routes from "./src/routes";
@@ -95,5 +95,10 @@ const postClosedSchedule = nodeSchedule.scheduleJob(
 
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port);
-
 module.exports = httpsServer;
+
+// app.listen(port, () => {
+//   console.log('done')
+// });
+
+// module.exports = app;

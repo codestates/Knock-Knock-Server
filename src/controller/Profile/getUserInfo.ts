@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../../entity/User";
-import { Post } from "../../entity/Post";
+import User from "../../entity/User";
+import Post from "../../entity/Post";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;

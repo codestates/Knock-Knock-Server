@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import axios from "axios";
-import { User } from "../../entity/User";
+import User from "../../entity/User";
 import * as dotenv from "dotenv";
 dotenv.config();
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../../entity/User";
+import  User  from "../../entity/User";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { username, persona, mood, user_stacks } = req.body;

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Post } from "../../entity/Post";
+import Post from "../../entity/Post";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { postid, backend, frontend, category } = req.body;
