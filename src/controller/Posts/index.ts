@@ -1,6 +1,5 @@
- import getPostsAll from "./getPostsAll";
+import getPostsAll from "./getPostsAll";
 import writingPost from "./writingPost";
-import closingPost from "./closingPost";
-import deletingHistory from "./deletingHistory";
+import closingOrUnjoin from "./closingOrUnjoin";
 
-export { writingPost, getPostsAll, closingPost, deletingHistory };
+export { writingPost, getPostsAll, closingOrUnjoin };
