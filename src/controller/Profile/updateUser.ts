@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import  User  from "../../entity/User";
 
 export default async (req: Request, res: Response): Promise<void> => {

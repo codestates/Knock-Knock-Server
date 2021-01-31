@@ -49,7 +49,6 @@ export default async (
               res.status(201).send({ data: newResult }); // 여기서 리다이렉션
             }
           })
-          .catch((error) => console.log(error));
       });
   } else {
     //Github Oauth

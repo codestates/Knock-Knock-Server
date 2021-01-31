@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import Comment from "../../entity/Comment";
-import User  from "../../entity/User";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { commentid, postid } = req.body;

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import User from "../../entity/User";
 import Post from "../../entity/Post";
 

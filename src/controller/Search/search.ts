@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import Post from "../../entity/Post";
 import { getConnection } from "typeorm";
 

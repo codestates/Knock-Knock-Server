@@ -15,6 +15,7 @@ export default async (req: Request, res: Response): Promise<void> => {
       result.identifiers[0].id,
       postid
     );
+    
     const diaryResult = await Diary.getDiary(postid, userid);
 
     if (result) {
