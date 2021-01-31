@@ -1,9 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
 export default async (req: Request, res: Response): Promise<void> => {
   const { userid } = req.session;
-
-  console.log(userid)
   
   if (userid) {
     req.session.destroy(() => {

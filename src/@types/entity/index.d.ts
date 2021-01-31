@@ -13,33 +13,33 @@ declare module entity {
 	}
 
 	interface PostTypes {
-		id: number;
-		writer: string;
-		category: string;
-		title: string;
-		content: string;
-    open: boolean;
-		created_at: Date;
-		updated_at: Date;
-		backend: number;
-		frontend: number;
-		total: number;
-		post_stacks: string;
+		id?: number;
+		writer?: string;
+		category?: string;
+		title?: string;
+		content?: string;
+		open?: boolean;
+		created_at?: Date;
+		updated_at?: Date;
+		backend?: number;
+		frontend?: number;
+		total?: number;
+		post_stacks?: string;
 	}
 
 	interface DiaryTypes {
-		id: number;
-		content: string;
-		created_at: Date;
-		updated_at: Date;
+		id?: number;
+		content?: string;
+		created_at?: Date;
+		updated_at?: Date;
 	}
 
 	interface CommentTypes {
-		id: number;
-		writer: string;
-		comment: string;
-		created_at: Date;
-		updated_at: Date;
+		id?: number;
+		writer?: string;
+		comment?: string;
+		created_at?: Date;
+		updated_at?: Date;
 	}
 }
 

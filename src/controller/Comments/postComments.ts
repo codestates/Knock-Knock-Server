@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import Comment from "../../entity/Comment";
 
 export default async (req: Request, res: Response): Promise<void> => {
@@ -12,7 +12,6 @@ export default async (req: Request, res: Response): Promise<void> => {
     await Comment.joinPost(results.identifiers[0].id, postid);
 
     const allComments = await Comment.getComments(postid);
-
     if (allComments) {
       res.status(200).send({ data: allComments });
     } else {
