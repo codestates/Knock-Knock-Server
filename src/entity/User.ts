@@ -56,7 +56,7 @@ export default class User extends BaseEntity  {
 	post!: Post[];
 
 	//세션 userid로 유저 데이터를 검색한다.
-	static findById(id: string) {
+	static findById(id: any) {
 		return this.createQueryBuilder("user")
 			.where("user.id = :id", { id })
 			.getOne();
