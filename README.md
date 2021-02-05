@@ -4,7 +4,7 @@
 
 # 협업부터 기록까지 Knock-Knock으로 끝! 👍🏻
 
-![ezgif-3-c5df6383091e](https://user-images.githubusercontent.com/69799645/106683230-78a7d000-6607-11eb-82f6-accfec9d8fce.gif)
+<p><img width="100%" height="100%" src="https://user-images.githubusercontent.com/69799645/106683230-78a7d000-6607-11eb-82f6-accfec9d8fce.gif" alt='main'></p>
 
 ### Knock-Knock에서는
 
